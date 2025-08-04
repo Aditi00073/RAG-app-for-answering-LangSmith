@@ -1,0 +1,9 @@
+streamlit
+langchain
+langchain-groq
+langchain-community
+python-dotenv
+faiss-cpu # or faiss-gpu if you have a compatible GPU
+ollama
+beautifulsoup4
+#faiss-gpu
