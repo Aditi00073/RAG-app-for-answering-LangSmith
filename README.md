@@ -1,27 +1,94 @@
-### **Project Title:** RAG System for PyTorch Documentation using Groq and Ollama
 
-### **Overview**
-This project is a Streamlit-based application that implements a Retrieval-Augmented Generation (RAG) pipeline to provide accurate and context-aware answers to questions about PyTorch's official documentation. By integrating a local embedding model with a high-speed LLM, the system offers an efficient and verifiable way to query a custom knowledge base.
+### RAG System for LangSmith Documentation
 
-### **Key Features**
-* **Interactive Chat Interface:** A user-friendly web interface built with Streamlit for submitting questions and viewing responses.
-* **Dynamic Data Ingestion:** Automatically scrapes and processes content from a live website (PyTorch's documentation) to create an up-to-date knowledge base.
-* **Local & Open-Source Embeddings:** Utilizes the Ollama framework with the `nomic-embed-text` model to generate text embeddings locally, ensuring data privacy and cost-free operation.
-* **High-Speed Generation:** Integrates with the Groq API to leverage the `gemma2-9b-it` model for ultra-fast, low-latency answer generation.
-* **Contextual Integrity:** The RAG pipeline ensures that all answers are directly derived from the source documentation, with a "Document Similarity Search" expander to show the exact text chunks used to formulate the response.
+This project is a Streamlit-based application that implements a Retrieval-Augmented Generation (RAG) pipeline to provide accurate and context-aware answers to questions based on the official LangSmith documentation. It demonstrates a full-stack approach to building an LLM-powered application, leveraging open-source and high-speed cloud services for an efficient and verifiable Q\&A experience.
 
-### **Technical Stack**
-* **Application Framework:** Streamlit
-* **RAG Orchestration:** LangChain
-* **Data Loading:** `WebBaseLoader`
-* **Embedding Model:** Ollama with `nomic-embed-text`
-* **Vector Database:** FAISS
-* **LLM:** Groq API with `gemma2-9b-it`
-* **Dependencies:** `python-dotenv` for managing API keys.
+-----
 
-### **How It Works**
-1.  **Data Ingestion:** The application first loads content from the PyTorch documentation website, splits the text into manageable chunks, and converts each chunk into a numerical vector using the **Ollama embedding model**.
-2.  **Vector Store Creation:** These vectors are stored in an in-memory **FAISS vector database**, creating a searchable index of the documentation.
-3.  **Retrieval:** When a user asks a question, the system uses the same Ollama embedding model to convert the question into a vector. It then performs a similarity search in the FAISS database to retrieve the most relevant text chunks from the documentation.
-4.  **Augmented Generation:** The user's question, along with the retrieved text chunks, is sent to the **Groq LLM (`gemma2-9b-it`)**.
-5.  **Final Output:** The LLM generates a concise and accurate answer based **only** on the provided context, which is then displayed to the user in the Streamlit interface.
+### Key Features
+
+  * **Interactive Chat Interface:** A user-friendly web application built with Streamlit for submitting questions and viewing responses.
+  * **Dynamic Data Ingestion:** The application scrapes and processes content from the official LangSmith documentation website (`https://docs.smith.langchain.com/`) to create a custom knowledge base.
+  * **Local & Open-Source Embeddings:** Utilizes the Ollama framework with the `nomic-embed-text` model to generate text embeddings locally, ensuring data privacy and cost-free operation.
+  * **High-Speed Generation:** Integrates with the Groq API to leverage the `gemma2-9b-it` model for ultra-fast, low-latency answer generation.
+  * **Contextual Integrity:** The RAG pipeline ensures all answers are derived directly from the source documentation, with a "Document Similarity Search" expander to show the exact text chunks used.
+
+-----
+
+### Technical Stack
+
+  * **Application Framework:** Streamlit
+  * **RAG Orchestration:** LangChain
+  * **Data Loading:** `WebBaseLoader`
+  * **Embedding Model:** Ollama (`nomic-embed-text`)
+  * **Vector Database:** FAISS
+  * **LLM:** Groq API (`gemma2-9b-it`)
+  * **Dependencies:** `python-dotenv`
+
+-----
+
+### How to Run the Project Locally
+
+Follow these steps to set up and run the application on your local machine.
+
+#### 1\. Prerequisites
+
+  * Python 3.8+
+  * Git
+  * Ollama (installed and running)
+
+#### 2\. Clone the Repository & Install Dependencies
+
+Open your terminal and run the following commands:
+
+```bash
+# Clone the repository
+git clone https://github.com/Aditi00073/RAG-app-for-answering-LangSmith.git
+
+# Navigate to the project directory
+cd RAG-app-for-answering-LangSmith
+
+# Install the required Python packages
+pip install -r requirements.txt
+```
+
+**Note:** You will need a `requirements.txt` file in your repository. You can generate one by running `pip freeze > requirements.txt` in your project directory. The contents should look like this:
+
+```
+streamlit
+langchain
+langchain-groq
+langchain-community
+faiss-cpu
+langchain-core
+ollama
+python-dotenv
+```
+
+#### 3\. Set Up Ollama
+
+Your project relies on the Ollama server to create embeddings.
+
+  * Make sure the Ollama application is running on your computer.
+  * Pull the embedding model required by the project:
+    ```bash
+    ollama pull nomic-embed-text
+    ```
+
+#### 4\. Configure API Keys
+
+Create a file named `.env` in the root of your project directory and add your Groq API key:
+
+```
+GROQ_API_KEY="gsk_your_api_key_here"
+```
+
+#### 5\. Run the Streamlit Application
+
+With all the setup complete, you can now launch the application:
+
+```bash
+streamlit run app.py
+```
+
+Your browser will open automatically, and you can start interacting with your RAG system.
